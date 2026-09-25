@@ -1,0 +1,50 @@
+/* Checkbox root styles */
+.root {
+  position: relative;
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm, 0.25rem);
+  border: 1px solid var(--border-default, #e5e7eb);
+  background-color: transparent;
+  transition: border-color var(--motion-duration-150, 150ms) var(--motion-easing-default, ease-in-out), background-color var(--motion-duration-150, 150ms) var(--motion-easing-default, ease-in-out), box-shadow var(--motion-duration-150, 150ms) var(--motion-easing-default, ease-in-out);
+  outline: none;
+  cursor: pointer;
+}
+
+.root:focus-visible {
+  border-color: var(--border-focus, #111827);
+  box-shadow: 0 0 0 var(--focus-ring-width, 2px) color-mix(in srgb, var(--border-focus, #111827) 15%, transparent);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.root[aria-invalid="true"] {
+  border-color: var(--border-error, #ef4444);
+  box-shadow: 0 0 0 var(--focus-ring-width, 2px) color-mix(in srgb, var(--border-error, #ef4444) 15%, transparent);
+}
+
+.root[data-state="checked"] {
+  border-color: var(--interactive-primary-bg, #111827);
+  background-color: var(--interactive-primary-bg, #111827);
+  color: var(--interactive-primary-text, #f9fafb);
+}
+
+/* Indicator */
+.indicator {
+  display: grid;
+  place-content: center;
+  color: currentColor;
+  transition: none;
+}
+
+.icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}

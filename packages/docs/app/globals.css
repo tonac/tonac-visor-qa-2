@@ -1,0 +1,152 @@
+@import 'fumadocs-ui/style.css';
+@import '../../tokens/dist/tokens.css';
+@import './space-theme.css';
+@import './neutral-theme.css';
+
+/*
+ * Safari border-color fix
+ *
+ * Ensures theme border colors win specificity over both Tailwind's
+ * reset and fumadocs' base layer selector.
+ * fumadocs v16 uses --color-fd-border (full color value).
+ */
+:root *,
+:root *::before,
+:root *::after {
+  border-color: var(--color-fd-border);
+}
+
+/* Footer prev/next nav — fumadocs v16 omits bg-fd-card */
+.\@container.grid > a.rounded-lg {
+  background-color: var(--color-fd-card);
+}
+
+/* Floating menus: keep the open/close animation on the compositor */
+[role="menu"] {
+  will-change: transform, opacity;
+}
+
+/* Component preview styles */
+.preview-container {
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.preview-render {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+  background: var(--surface-page, #ffffff);
+  min-height: 120px;
+}
+
+.preview-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--surface-muted, #f1f5f9);
+  border-top: 1px solid var(--border-default, #e2e8f0);
+}
+
+.preview-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #64748b);
+  font-weight: 500;
+  margin: 0;
+}
+
+.preview-toggle {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-page, #ffffff);
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.preview-toggle:hover {
+  background: var(--surface-muted, #f1f5f9);
+}
+
+.preview-code {
+  border-top: 1px solid var(--border-default, #e2e8f0);
+  overflow: hidden;
+}
+
+.preview-copy {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background: var(--surface-page, #ffffff);
+  color: var(--text-primary, #0f172a);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.preview-copy:hover {
+  background: var(--surface-muted, #f1f5f9);
+}
+
+/* Space theme preview container overrides */
+.space-theme .preview-container {
+  border-color: var(--border-strong);
+  background: var(--surface-card);
+}
+
+.space-theme .preview-render {
+  background: var(--surface-elevated);
+}
+
+.space-theme .preview-footer {
+  background: var(--surface-subtle);
+  border-top-color: var(--border-default);
+}
+
+.space-theme .preview-title {
+  color: var(--text-tertiary);
+}
+
+.space-theme .preview-toggle,
+.space-theme .preview-copy {
+  border-color: var(--border-strong);
+  background: var(--surface-card);
+  color: var(--text-secondary);
+}
+
+.space-theme .preview-toggle:hover,
+.space-theme .preview-copy:hover {
+  background: var(--surface-elevated);
+}
+
+/* Code area inside preview — inherit the theme's glass treatment, no extra border/radius */
+.preview-code pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.8125rem !important;
+  font-weight: 200 !important;
+  line-height: 1.6;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.preview-code pre code {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit;
+  font-weight: inherit !important;
+}
+
+.preview-code pre code span {
+  font-weight: inherit !important;
+}

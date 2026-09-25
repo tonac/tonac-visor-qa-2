@@ -1,0 +1,169 @@
+---
+title: Button
+description: A versatile button component with multiple variants and sizes. Built with CVA and CSS Modules — copy it into your project and own it completely.
+---
+
+import { ComponentPreview } from '@/components/preview';
+import { PropsTable } from '@/components/props-table';
+import { Button } from '@/components/ui/button';
+
+## Installation
+
+```bash
+npx visor add button
+```
+
+This copies two files into your project:
+
+- `components/ui/button/button.tsx` — the component
+- `components/ui/button/button.module.css` — the styles
+
+## Usage
+
+```tsx
+import { Button } from '@/components/ui/button/button';
+
+export default function Example() {
+  return <Button>Click me</Button>;
+}
+```
+
+## Variants
+
+<ComponentPreview
+  title="All Variants"
+  code={`import { Button } from '@/components/ui/button/button';
+
+<Button variant="default">Default</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Destructive</Button>`}
+>
+  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+    <Button variant="default">Default</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="outline">Outline</Button>
+    <Button variant="ghost">Ghost</Button>
+    <Button variant="destructive">Destructive</Button>
+  </div>
+</ComponentPreview>
+
+## Sizes
+
+<ComponentPreview
+  title="All Sizes"
+  code={`import { Button } from '@/components/ui/button/button';
+
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>`}
+>
+  <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+    <Button size="sm">Small</Button>
+    <Button size="md">Medium</Button>
+    <Button size="lg">Large</Button>
+  </div>
+</ComponentPreview>
+
+## Disabled State
+
+<ComponentPreview
+  title="Disabled"
+  code={`<Button disabled>Disabled</Button>
+<Button variant="outline" disabled>Disabled Outline</Button>`}
+>
+  <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+    <Button disabled>Disabled</Button>
+    <Button variant="outline" disabled>Disabled Outline</Button>
+  </div>
+</ComponentPreview>
+
+## API Reference
+
+### ButtonProps
+
+<PropsTable component="button" />
+
+The component also accepts all standard `<button>` HTML attributes.
+
+## Source Files
+
+After running `npx visor add button`, you'll have:
+
+### `button.tsx`
+
+```tsx
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import styles from "./button.module.css";
+
+const buttonVariants = cva(styles.base, {
+  variants: {
+    variant: {
+      default: styles.variantDefault,
+      secondary: styles.variantSecondary,
+      outline: styles.variantOutline,
+      ghost: styles.variantGhost,
+      destructive: styles.variantDestructive,
+    },
+    size: {
+      sm: styles.sizeSm,
+      md: styles.sizeMd,
+      lg: styles.sizeLg,
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size }), className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+```
+
+### `button.module.css`
+
+All styles use CSS custom properties from `@loworbitstudio/visor-core`, so the button automatically adapts to your active theme.
+
+## Customization
+
+After copying the component, you own it completely. Common customizations:
+
+```tsx
+// Add a loading state
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, loading, children, ...props }, ref) => {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size }), className)}
+        disabled={loading || props.disabled}
+        ref={ref}
+        {...props}
+      >
+        {loading ? <Spinner size={16} /> : children}
+      </button>
+    );
+  }
+);
+```

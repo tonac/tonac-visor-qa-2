@@ -1,0 +1,59 @@
+/* Card */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6, 1.5rem);
+  overflow: hidden;
+  border-radius: var(--radius-xl, 1rem);
+  background-color: var(--surface-card, #ffffff);
+  color: var(--text-primary, #111827);
+  font-size: var(--font-size-sm, 0.875rem);
+  padding-top: var(--spacing-6, 1.5rem);
+  padding-bottom: var(--spacing-6, 1.5rem);
+  box-shadow: 0 0 0 1px var(--border-default, #e5e7eb);
+}
+
+.cardSm {
+  gap: var(--spacing-4, 1rem);
+  padding-top: var(--spacing-4, 1rem);
+  padding-bottom: var(--spacing-4, 1rem);
+}
+
+/* CardHeader */
+.cardHeader {
+  display: grid;
+  grid-auto-rows: min-content;
+  align-items: start;
+  gap: var(--spacing-2, 0.5rem);
+  border-radius: var(--radius-xl, 1rem) var(--radius-xl, 1rem) 0 0;
+  padding-left: var(--spacing-6, 1.5rem);
+  padding-right: var(--spacing-6, 1.5rem);
+}
+
+/* CardTitle */
+.cardTitle {
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+/* CardDescription */
+.cardDescription {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--text-secondary, #6b7280);
+}
+
+/* CardContent */
+.cardContent {
+  padding-left: var(--spacing-6, 1.5rem);
+  padding-right: var(--spacing-6, 1.5rem);
+}
+
+/* CardFooter */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  border-radius: 0 0 var(--radius-xl, 1rem) var(--radius-xl, 1rem);
+  padding-left: var(--spacing-6, 1.5rem);
+  padding-right: var(--spacing-6, 1.5rem);
+}
